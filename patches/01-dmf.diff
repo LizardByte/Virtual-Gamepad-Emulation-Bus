@@ -1,0 +1,113 @@
+diff --git a/Dmf/Solution/DmfK/DmfK.vcxproj b/Dmf/Solution/DmfK/DmfK.vcxproj
+index 5438418..6f443b9 100644
+--- a/Dmf/Solution/DmfK/DmfK.vcxproj
++++ b/Dmf/Solution/DmfK/DmfK.vcxproj
+@@ -45,37 +45,37 @@
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <CharacterSet>Unicode</CharacterSet>
+     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <CharacterSet>Unicode</CharacterSet>
+     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <CharacterSet>Unicode</CharacterSet>
+     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <CharacterSet>Unicode</CharacterSet>
+     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <CharacterSet>Unicode</CharacterSet>
+     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <CharacterSet>Unicode</CharacterSet>
+     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <PropertyGroup>
+     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
+@@ -111,6 +111,9 @@
+       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+@@ -140,6 +143,9 @@
+       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+@@ -170,6 +176,8 @@
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
+       <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'">/d2guardsignret %(AdditionalOptions)</AdditionalOptions>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+@@ -200,6 +208,9 @@
+       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+@@ -229,6 +240,9 @@
+       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+@@ -259,6 +273,8 @@
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
+       <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'">/d2guardsignret %(AdditionalOptions)</AdditionalOptions>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+@@ -282,4 +298,4 @@
+     <ClCompile Include="DmfK.c" />
+   </ItemGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+-</Project>
+\ No newline at end of file
++</Project>
