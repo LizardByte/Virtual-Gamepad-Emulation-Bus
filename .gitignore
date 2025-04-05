@@ -368,3 +368,6 @@ FodyWeavers.xsd
 /setup/ViGEmBus.back.aip
 /sdk
 *.aip
+
+# Ignore JetBrains IDE files
+.idea/
