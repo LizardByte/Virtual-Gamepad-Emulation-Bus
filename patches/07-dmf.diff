@@ -1,0 +1,78 @@
+diff --git a/Dmf/Solution/DmfUModules.Library/DmfUModules.Library.vcxproj b/Dmf/Solution/DmfUModules.Library/DmfUModules.Library.vcxproj
+index 186dba2..72b4e71 100644
+--- a/Dmf/Solution/DmfUModules.Library/DmfUModules.Library.vcxproj
++++ b/Dmf/Solution/DmfUModules.Library/DmfUModules.Library.vcxproj
+@@ -46,37 +46,37 @@
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>WindowsUserModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+     <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>WindowsUserModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+     <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>WindowsUserModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+     <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'" Label="Configuration">
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <PlatformToolset>WindowsUserModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+     <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>WindowsUserModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+     <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'" Label="Configuration">
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <PlatformToolset>WindowsUserModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+     <UMDF_VERSION_MAJOR>2</UMDF_VERSION_MAJOR>
+   </PropertyGroup>
+   <PropertyGroup>
+@@ -154,6 +154,22 @@
+       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">/await %(AdditionalOptions)</AdditionalOptions>
+       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">/await %(AdditionalOptions)</AdditionalOptions>
+       <AdditionalOptions Condition="'$(Configuration)|$(Platform)'=='Release|x64'">/await %(AdditionalOptions)</AdditionalOptions>
++      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">MaxSpeed</Optimization>
++      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Debug|ARM64'">Speed</FavorSizeOrSpeed>
++      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">MaxSpeed</Optimization>
++      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">Speed</FavorSizeOrSpeed>
++      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">MaxSpeed</Optimization>
++      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">true</WholeProgramOptimization>
++      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">MaxSpeed</Optimization>
++      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">true</WholeProgramOptimization>
++      <Optimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">MaxSpeed</Optimization>
++      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">true</WholeProgramOptimization>
++      <Optimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">MaxSpeed</Optimization>
++      <FavorSizeOrSpeed Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization Condition="'$(Configuration)|$(Platform)'=='Release|x64'">true</WholeProgramOptimization>
+     </ClCompile>
+     <ClCompile Condition="'$(Platform)'=='ARM64'">
+       <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'">/d2guardsignret %(AdditionalOptions)</AdditionalOptions>
+@@ -321,4 +337,4 @@
+     <None Include="..\..\Modules.Library\Dmf_UefiOperation.md" />
+   </ItemGroup>
+   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+-</Project>
+\ No newline at end of file
++</Project>
