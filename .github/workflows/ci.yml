@@ -1,0 +1,153 @@
+﻿---
+name: CI
+permissions:
+  contents: read
+
+on:
+  pull_request:
+    branches:
+      - master
+    types:
+      - opened
+      - synchronize
+      - reopened
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+concurrency:
+  group: "${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  setup_release:
+    name: Setup Release
+    outputs:
+      publish_release: ${{ steps.setup_release.outputs.publish_release }}
+      release_body: ${{ steps.setup_release.outputs.release_body }}
+      release_commit: ${{ steps.setup_release.outputs.release_commit }}
+      release_generate_release_notes: ${{ steps.setup_release.outputs.release_generate_release_notes }}
+      release_tag: ${{ steps.setup_release.outputs.release_tag }}
+      release_version: ${{ steps.setup_release.outputs.release_version }}
+    permissions:
+      contents: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Release
+        id: setup_release
+        uses: LizardByte/setup-release-action@v2025.102.14715
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+
+  build:
+    name: Build
+    needs: setup_release
+    runs-on: windows-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          submodules: recursive
+
+      - name: Apply patches
+        working-directory: DMF
+        run: |
+          git apply -v --ignore-whitespace "${{ github.workspace }}/patches/01-dmf.diff"
+          git apply -v --ignore-whitespace "${{ github.workspace }}/patches/02-dmf.diff"
+          git apply -v --ignore-whitespace "${{ github.workspace }}/patches/03-dmf.diff"
+          git apply -v --ignore-whitespace "${{ github.workspace }}/patches/04-dmf.diff"
+          git apply -v --ignore-whitespace "${{ github.workspace }}/patches/05-dmf.diff"
+          git apply -v --ignore-whitespace "${{ github.workspace }}/patches/06-dmf.diff"
+          git apply -v --ignore-whitespace "${{ github.workspace }}/patches/07-dmf.diff"
+          git apply -v --ignore-whitespace "${{ github.workspace }}/patches/08-dmf.diff"
+
+      - name: Install Windows Driver Kit (WDK)
+        run: |
+          $url = "https://download.microsoft.com/download/c/f/8/cf80b955-d578-4635-825c-2801911f9d79/wdk/wdksetup.exe"
+          $wdkPath = "$env:TEMP\wdksetup.exe"
+          Invoke-WebRequest -Uri $url -OutFile $wdkPath
+          Start-Process -FilePath $wdkPath -ArgumentList "/quiet", "/norestart" -Wait
+
+          # Function to recursively list directories and files
+          function Show-DirectoryStructure {
+            param (
+              [string]$Path,
+              [string]$BasePath,
+              [int]$Level = 0
+            )
+
+            $indent = "  " * $Level
+
+            # Get directories first
+            Get-ChildItem -Path $Path -Directory | ForEach-Object {
+              Write-Host "$indent[DIR] $($_.Name)"
+              Show-DirectoryStructure -Path $_.FullName -BasePath $BasePath -Level ($Level + 1)
+            }
+
+            # Then get files
+            Get-ChildItem -Path $Path -File | ForEach-Object {
+              Write-Host "$indent[FILE] $($_.Name)"
+            }
+          }
+
+          # print log
+          $logDir = "$env:TEMP\WDK"
+          $logFiles = Get-ChildItem -Path $logDir -Recurse -File
+          foreach ($logFile in $logFiles) {
+            Write-Host "Log file: $($logFile.FullName)"
+            Get-Content -Path $logFile.FullName -Tail 10
+          }
+
+          # Verify WDK installation
+          $wdkInstallPath = "C:\Program Files (x86)\Windows Kits\10"
+          if (Test-Path $wdkInstallPath) {
+            Write-Host "WDK appears to be installed at: $wdkInstallPath"
+
+            # Specifically check for the wdf directory and display its structure
+            $wdfPath = "$wdkInstallPath\Include\wdf"
+            if (Test-Path $wdfPath) {
+              Write-Host "WDF directory found: $wdfPath"
+
+              # Show WDF structure
+              Show-DirectoryStructure -Path $wdfPath -BasePath $wdfPath
+
+              # Show all SDK versions and their structures
+              Get-ChildItem -Path "$wdkInstallPath\Include" -Directory | ForEach-Object {
+                if ($_.Name -ne "wdf") {  # Skip wdf as we already processed it separately
+                  Write-Host "`nSDK version: $($_.Name)"
+                  Show-DirectoryStructure -Path $_.FullName -BasePath $_.FullName
+                }
+              }
+            } else {
+              Write-Host "WDF directory not found!"
+              exit 1
+            }
+          } else {
+            Write-Host "WDK installation path not found!"
+            exit 1
+          }
+
+      - name: Build
+        env:
+          DmfRootPath: "${{ github.workspace }}\\DMF"
+        run: .\build.cmd
+
+      - name: Create CAB
+        env:
+          PLATFORM: x64
+        run: makecab.exe /f ViGEmBus_%PLATFORM%.ddf
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          if-no-files-found: error
+          name: build
+          path: |
+            bin**\${{ github.event.repository.name }}\*.inf
+            bin**\${{ github.event.repository.name }}\*.sys
+            bin**\*.pdb
+            disk1\*.cab
