@@ -1,0 +1,96 @@
+diff --git a/Dmf/Solution/DmfKModules.Template/DmfKModules.Template.vcxproj b/Dmf/Solution/DmfKModules.Template/DmfKModules.Template.vcxproj
+index 3d942a1..9db329c 100644
+--- a/Dmf/Solution/DmfKModules.Template/DmfKModules.Template.vcxproj
++++ b/Dmf/Solution/DmfKModules.Template/DmfKModules.Template.vcxproj
+@@ -45,13 +45,13 @@
+     <UseDebugLibraries>true</UseDebugLibraries>
+     <CharacterSet>Unicode</CharacterSet>
+     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <PropertyGroup Condition="'$(Configuration)'=='Release'" Label="Configuration">
+     <UseDebugLibraries>false</UseDebugLibraries>
+     <CharacterSet>Unicode</CharacterSet>
+     <PlatformToolset>WindowsKernelModeDriver10.0</PlatformToolset>
+-    <WindowsTargetPlatformVersion>$(LatestTargetPlatformVersion)</WindowsTargetPlatformVersion>
++    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
+   </PropertyGroup>
+   <PropertyGroup>
+     <DebuggerFlavor>DbgengKernelDebugger</DebuggerFlavor>
+@@ -85,6 +85,9 @@
+       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+@@ -109,6 +112,9 @@
+       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+@@ -133,13 +139,15 @@
+       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
+-      <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'" >/d2guardsignret %(AdditionalOptions)</AdditionalOptions>
++      <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'">/d2guardsignret %(AdditionalOptions)</AdditionalOptions>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+       <AdditionalDependencies>%(AdditionalDependencies);setupapi.lib;cfgmgr32.lib;wpprecorder.lib;</AdditionalDependencies>
+       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+-      <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'" >/guard:delayloadsignret %(AdditionalOptions)</AdditionalOptions>
++      <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'">/guard:delayloadsignret %(AdditionalOptions)</AdditionalOptions>
+     </Link>
+     <ProjectReference>
+       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
+@@ -159,6 +167,9 @@
+       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+@@ -183,6 +194,9 @@
+       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
++      <WholeProgramOptimization>true</WholeProgramOptimization>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+@@ -207,13 +221,15 @@
+       <DebugInformationFormat>OldStyle</DebugInformationFormat>
+       <WppFileExtensions>.c.C.cpp.CPP.h.H</WppFileExtensions>
+       <WppRecorderEnabled>true</WppRecorderEnabled>
+-      <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'" >/d2guardsignret %(AdditionalOptions)</AdditionalOptions>
++      <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'">/d2guardsignret %(AdditionalOptions)</AdditionalOptions>
++      <Optimization>MaxSpeed</Optimization>
++      <FavorSizeOrSpeed>Speed</FavorSizeOrSpeed>
+     </ClCompile>
+     <Link>
+       <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+       <AdditionalDependencies>%(AdditionalDependencies);setupapi.lib;cfgmgr32.lib;wpprecorder.lib;</AdditionalDependencies>
+       <IgnoreAllDefaultLibraries>true</IgnoreAllDefaultLibraries>
+-      <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'" >/guard:delayloadsignret %(AdditionalOptions)</AdditionalOptions>
++      <AdditionalOptions Condition="'$(_NT_TARGET_VERSION)'=='$(_NT_TARGET_VERSION_WIN10_CO)'">/guard:delayloadsignret %(AdditionalOptions)</AdditionalOptions>
+     </Link>
+     <ProjectReference>
+       <UseLibraryDependencyInputs>false</UseLibraryDependencyInputs>
